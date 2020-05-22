@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { randomFromSeed } from '../../helper/randomHelper';
+import { randomFromSeed, getIndex } from '../../helper/randomHelper';
 import { maxPossibilities, getGuidSection } from '../../helper/guidHelper';
 
 import { Logo1 } from './logo1';
@@ -11,13 +11,21 @@ interface IProps {
 
 export const Logo = (props: IProps) => {
     const randomSeed = getGuidSection(props.guid, 0);
-    const rando: number = randomFromSeed(randomSeed);
+    const rando: number = randomFromSeed(randomSeed, maxPossibilities);
 
-    const possibilities = [
-        <Logo1 />
-    ];
+    console.log('Logo', { rando })
+    return getLogoComponent(rando);
+}
 
-    let index = Math.round(maxPossibilities / rando);
-    if (index / maxPossibilities) return possibilities[0];
-    return possibilities[index];
+const getLogoComponent = (rando: number) => {
+    const numPossibilities = 1;
+    const selectedIndex = getIndex(numPossibilities, rando, maxPossibilities);
+
+    switch (selectedIndex) {
+        case 0:
+        default:
+            return <Logo1 />;
+        // case 1:
+        //     return <h1 />;
+    }
 }
