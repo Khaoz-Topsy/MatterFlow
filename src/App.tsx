@@ -1,36 +1,45 @@
 import React from 'react';
+
+import { randomGuid } from './helper/guidHelper';
+
+import { Sidebar } from './components/sidebar/index';
 import { Logo } from './components/logo/index';
+import { Main } from './components/main/index';
 
-export const App = () => {
-  const guid = '000-000-000-000'
-  return (
-    <>
-      <Logo guid={guid} />
+interface IState {
+  guid: string
+}
 
-      <section id="main">
-        <div className="mainGrid">
-          <div className="item1">
-            <p>Procedurally generated Space Stations</p>
-            <p>Procedurally generated Space Ships</p>
-            <p>Procedurally generated Weapons</p>
-            <p>Procedurally generated Chairs!</p>
-            <p>Procedurally generated Space Stations</p>
-          </div>
-          <div className="item2"></div>
-          <div className="item3"></div>
-        </div>
-      </section>
+export class App extends React.PureComponent<any, IState> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      // guid: '000-000-000-000'
+      guid: `${randomGuid()}-${randomGuid()}-${randomGuid()}-${randomGuid()}`
+    }
+  }
 
-      <section id="footer">
-        <div className="container">
+  render() {
+    return (
+      <>
+        <Sidebar guid={this.state.guid} />
+        <div className="content">
+          <Logo guid={this.state.guid} />
+          <Main guid={this.state.guid} />
+
+          <section id="footer">
+            <div className="container">
+            </div>
+            <div id="copyright">
+              <ul>
+                <li>&copy; Matter Flow</li>
+                <li>Created by: Avgust Stupin</li>
+                <li>Web Design: <a href="https://kurtlourens.com">Kurt Lourens</a></li>
+              </ul>
+            </div>
+          </section>
         </div>
-        <div id="copyright">
-          <ul>
-            <li>&copy; Matter Flow</li>
-            <li><a href="https://kurtlourens.com">Kurt Lourens</a></li>
-          </ul>
-        </div>
-      </section>
-    </>
-  );
+      </>
+    );
+  }
 }

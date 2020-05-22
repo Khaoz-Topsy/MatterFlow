@@ -1,0 +1,64 @@
+@mixin fade {
+    animation: fade 300ms ease forwards;
+}
+
+@mixin transition {
+    transition: all 200ms ease;
+}
+
+
+.sidebar-toggle {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 200ms ease;
+
+    &.open {
+        transform: translateX(410px);
+    }
+}
+
+.sidebar {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: -400px;
+    background: rgba(black, .7);
+    width: 400px;
+    border-radius: 25px;
+    transition: all 200ms ease;
+    box-shadow: 0px 5px 12px rgba(black, .1), 0px 3px 6px rgba(black, .06);
+
+    .content {
+        padding: 1em;
+    }
+
+    &.open {
+        left: 10px;
+    }
+
+    p {
+        margin: 0;
+        padding: 0;
+    }
+
+    input {
+        font-size: 1em;
+        border-radius: 10px;
+        padding: 0 10px;
+        color: black;
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
